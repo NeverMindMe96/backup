@@ -32,17 +32,9 @@ function loginUser($email, $password, $conn) {
           array_push($errors, "Invalid email or password");
           return null;
       }
+
   }
 }
-
-
-
-
-
-
-
-
-
 
 // Initialize variables to hold user input
 $email = "";
@@ -65,17 +57,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // If user info is not null, display user information
     if ($userInfo) {
+
+        session_start();
+
         $firstName = $userInfo['firstname'];
         $lastName = $userInfo['lastname'];
         $phoneNumber = $userInfo['contactnumber'];
         // Display user information
         echo "<h3>Welcome, $firstName $lastName</h3>";
         echo "<p>Phone Number: $phoneNumber</p>";
+
+        $_SESSION['firstName'] = $firstName;
+        $_SESSION['lastname'] = $lastName;
+        $_SESSION['email'] = $email;
+        $_SESSION['phonenumber'] = $phoneNumber;
+
+        header( 'Location: login_welcome.php' ) ; 
+
+        
+        
     } else {
         // If user info is null, display login error
         echo "<p>Login failed. Invalid email or password.</p>";
     }
 }
+
+
 ?>
 
 

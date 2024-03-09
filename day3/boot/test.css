@@ -1,6 +1,6 @@
 .BCK{
-    background-image: url("img/bck.jpg");
-    background-size: cover;
+    background-image: url("img/bck5.jpg");
+    background-size:contain;
 }
 #container {
     width: 100%;
@@ -28,6 +28,7 @@
     padding: 20px;
     margin-bottom: 20px;
     position: relative;
+    backdrop-filter: blur(1px);
   }
   
   .overlay {

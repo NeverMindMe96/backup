@@ -2,13 +2,11 @@
 
 
 
-
 <?php
-  // Include server.php for database connection and other server-side operations
+  // Include server.php for database connection and other server-side operations                                           //The letter R
   include('server.php');
   
-  // Function to check if a us
-  er already exists in the database
+  // Function to check if a user already exists in the database
   function userExists($conn, $email) {
       $sql = "SELECT * FROM login WHERE email='$email'";
       $result = $conn->query($sql);
@@ -24,6 +22,7 @@
   }
   
   // Check if form is submitted
+  //have fun with this code yuvaraj
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
       // Retrieve form data
       $email = $_POST['email'];
@@ -31,30 +30,33 @@
       $lastName = $_POST['lastName'];
       $password = $_POST['password'];
       $phoneNumber = $_POST['phoneNumber'];
-  
-      // Check if user already exists
-      if (userExists($conn, $email)) {
-          echo "User already exists!";
+      
+      // Check if all fields are filled
+      if (empty($email) || empty($firstName) || empty($lastName) || empty($password) || empty($phoneNumber)) {
+          echo "All fields are required!";
       } else {
-          // Prepare SQL statement to insert data into the database
-          $sql = "INSERT INTO login (email, firstname, lastname, password, contactnumber) VALUES ('$email', '$firstName', '$lastName', '$password', '$phoneNumber')";
-  
-          if ($conn->query($sql) === TRUE) {
-              echo "User registered successfully";
+          // Check if user already exists
+          if (userExists($conn, $email)) {
+              echo "User already exists!";
           } else {
-              echo "Error: " . $sql . "<br>" . $conn->error;
+              // Prepare SQL statement to insert data into the database
+              $sql = "INSERT INTO login (email, firstname, lastname, password, contactnumber) VALUES ('$email', '$firstName', '$lastName', '$password', '$phoneNumber')";
+  
+              if ($conn->query($sql) === TRUE) {
+                  echo "User registered successfully";
+              } else {
+                  echo "Error: " . $sql . "<br>" . $conn->error;
+              }
           }
-
       }
   }
+  //You will find me in Mercury, Earth, Mars and Jupiter, but not in Venus or Neptune. What am I?
+  // The answer is hidden in the above program 
   
-  // Get the number of registered users
-  $numberOfUsers = getNumberOfUsers($conn);
-  echo "Total registered users: $numberOfUsers";
-  
-  // Close connection
-  $conn->close();
-  ?>
+  // Display the number of registered users
+  echo "Total registered users: " . getNumberOfUsers($conn);
+?>
+
 
 
 
