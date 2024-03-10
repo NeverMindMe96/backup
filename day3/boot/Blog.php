@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -14,6 +15,10 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
     <body>
         <!-- Navigation-->
@@ -48,8 +53,7 @@
                   <li><a class="dropdown-item" href="https://www.youtube.com/watch?v=q-Y0bnx6Ndw">The one about Cute Puppy</a></li>
                 </ul>
               </li>
-                  <button type="button" class="btn btn-primary" id="undoButton" disabled>Undo</button>
-                <button type="button" class="btn btn-primary" id="redoButton" disabled>Redo</button>
+              <button id="undoBtn" class="btn btn-primary">Undo</button>
                 </ul>
                 <form class="d-flex">
                   <input class="form-control me-2" type="text" placeholder="Search">
@@ -58,69 +62,6 @@
               </div>
             </div>
           </nav>
-
-
-
-          <!-- undo and redo button-->
-      
-      
-      <!-- Bootstrap JS and jQuery -->
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-      
-      <script>
-        // Example variables to simulate actions
-        var actions = [];
-        var currentIndex = -1;
-      
-        // Function to perform an action (in this example, adding to a list)
-        function performAction(action) {
-          actions.push(action);
-          currentIndex++;
-          updateButtons();
-        }
-      
-        // Function to update button states
-        function updateButtons() {
-          if (currentIndex >= 0) {
-            $('#undoButton').prop('disabled', false);
-          } else {
-            $('#undoButton').prop('disabled', true);
-          }
-          if (currentIndex < actions.length - 1) {
-            $('#redoButton').prop('disabled', false);
-          } else {
-            $('#redoButton').prop('disabled', true);
-          }
-        }
-      
-        // Simulated actions
-        $('#undoButton').click(function() {
-          if (currentIndex >= 0) {
-            console.log('Undo: ' + actions[currentIndex]);
-            currentIndex--;
-            updateButtons();
-          }
-        });
-      
-        $('#redoButton').click(function() {
-          if (currentIndex < actions.length - 1) {
-            currentIndex++;
-            console.log('Redo: ' + actions[currentIndex]);
-            updateButtons();
-          }
-        });
-      
-        // Simulate actions (replace with your actual actions)
-        performAction('Action 1');
-        performAction('Action 2');
-        performAction('Action 3');
-      </script>
-
-
-
-
 
 
         <!-- Page Header-->
@@ -243,5 +184,14 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+
+        <script>
+    $(document).ready(function() {
+      $('#undoBtn').click(function() {
+        window.history.back(); // Redirect to previously opened page
+      });
+    });
+  </script>  
+
     </body>
 </html>

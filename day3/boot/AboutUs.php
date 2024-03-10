@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 
+
+
 <head>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -7,6 +9,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     
 
@@ -57,8 +63,7 @@
                   <li><a class="dropdown-item" href="https://www.youtube.com/watch?v=q-Y0bnx6Ndw">The one about Cute Puppy</a></li>
                 </ul>
               </li>
-              <button type="button" class="btn btn-primary" id="undoButton" disabled>Undo</button>
-            <button type="button" class="btn btn-primary" id="redoButton" disabled>Redo</button>
+              <button id="undoBtn" class="btn btn-primary">Undo</button>
             </ul>
             <form class="d-flex">
               <input class="form-control me-2" type="text" placeholder="Search">
@@ -164,7 +169,13 @@
         </div>
     </footer>
 
-
+    <script>
+    $(document).ready(function() {
+      $('#undoBtn').click(function() {
+        window.history.back(); // Redirect to previously opened page
+      });
+    });
+  </script>  
 
 </body>
 

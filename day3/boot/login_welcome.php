@@ -6,37 +6,31 @@ if (!isset($_SESSION['email'])) {
     header("Location: login.php");
     exit();
 }
-
 // Display welcome message with user's first name
 $firstName = $_SESSION['firstName'];
 $email = $_SESSION['email'];
-
 // Handle logout request
 if (isset($_POST['logout'])) {
     // Unset all session variables
     session_unset();
-
     // Destroy the session
     session_destroy();
-
     // Redirect to login page after logout
     header("Location: login.php");
     exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="test.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,11 +39,8 @@ if (isset($_POST['logout'])) {
     <title>Document</title>
 </head>
 <body class="BCK">
-   
     <!-- Add logout option -->
-    
     <!-- You can add more content here as needed -->
-
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="javascript:void(0)">AI Insight</a>
@@ -84,21 +75,16 @@ if (isset($_POST['logout'])) {
                   <li><a class="dropdown-item" href="https://www.youtube.com/watch?v=q-Y0bnx6Ndw">The one about Cute Puppy</a></li>
                 </ul>
               </li>
-              <button type="button" class="btn btn-primary" id="undoButton" disabled>Undo</button>
-            <button type="button" class="btn btn-primary" id="redoButton" disabled>Redo</button>
+              <button id="undoBtn" class="btn btn-primary">Undo</button>
             </ul>
-
             <form class=" nav-item" method="post" action="">
                 <label><?php echo $email ?></label>
                 <input class="btn btn-danger"type="submit" name="logout" value="Logout">
             </form>
-            
           </div>
         </div>
       </nav>
-
       <br><br>
-
       <div class="container">
       <h1>Welcome, <?php echo $firstName; ?>!</h1>
     <h1>Personal Information</h1>
@@ -112,10 +98,7 @@ if (isset($_POST['logout'])) {
       </textarea>
     </div>
   </div>
-
   <br><br>
-
-
       <body>
   <div class="container">
     <div class="row">
@@ -140,7 +123,6 @@ if (isset($_POST['logout'])) {
     </div>
   </div>
   <br><br>
-
   <footer class="footer" style="background-color: #333333; color: #ffffff;">
         <div class="container">
             <div class="row">
@@ -161,8 +143,12 @@ if (isset($_POST['logout'])) {
             </div>
         </div>
     </footer>
-
-
-
+    <script>
+    $(document).ready(function() {
+      $('#undoBtn').click(function() {
+        window.history.back(); // Redirect to previously opened page
+      });
+    });
+  </script>  
 </body>
 </html>

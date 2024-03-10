@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-
 <head>
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-    
-
     <link rel="stylesheet" href="test.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,116 +12,56 @@
     <title>Document</title>
 </head>
 <body class="BCK" style="position: relative;">
-
-
-    
-
     <!--Navigation bar-->
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="javascript:void(0)">AI Insight</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="mynavbar">
-            <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="home.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="login.html">Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="Register.html">Register</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="Blog.html">Blog</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="AboutUs.html">About us</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li>
-              <button type="button" class="btn btn-primary" id="undoButton" disabled>Undo</button>
-            <button type="button" class="btn btn-primary" id="redoButton" disabled>Redo</button>
-            </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="text" placeholder="Search">
-              <button class="btn btn-primary" type="button">Search</button>
-            </form>
-          </div>
+      <div class="container-fluid">
+        <a class="navbar-brand"> <img src="img/AI (2).png" style="width: 75px;"> </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mynavbar">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Register.html">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="AboutUs.html">About us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Blog.html">Blog</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                AI
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="https://chat.openai.com/">Chat GPT</a></li>
+                <li><a class="dropdown-item" href="https://gemini.google.com/app">Gemini</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="https://www.youtube.com/watch?v=q-Y0bnx6Ndw">The one about Cute Puppy</a></li>
+              </ul>
+            </li>
+            <button id="undoBtn" class="btn btn-primary">Undo</button>
+          </ul>
+          <form class="d-flex">
+            <input class="form-control me-2" type="text" placeholder="Search">
+            <button class="btn btn-primary" type="button">Search</button>
+          </form>
         </div>
-      </nav>
-
-
+      </div>
+    </nav>
       <!-- undo and redo button-->
-      
-      
       <!-- Bootstrap JS and jQuery -->
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-      
-      <script>
-        // Example variables to simulate actions
-        var actions = [];
-        var currentIndex = -1;
-      
-        // Function to perform an action (in this example, adding to a list)
-        function performAction(action) {
-          actions.push(action);
-          currentIndex++;
-          updateButtons();
-        }
-      
-        // Function to update button states
-        function updateButtons() {
-          if (currentIndex >= 0) {
-            $('#undoButton').prop('disabled', false);
-          } else {
-            $('#undoButton').prop('disabled', true);
-          }
-          if (currentIndex < actions.length - 1) {
-            $('#redoButton').prop('disabled', false);
-          } else {
-            $('#redoButton').prop('disabled', true);
-          }
-        }
-      
-        // Simulated actions
-        $('#undoButton').click(function() {
-          if (currentIndex >= 0) {
-            console.log('Undo: ' + actions[currentIndex]);
-            currentIndex--;
-            updateButtons();
-          }
-        });
-      
-        $('#redoButton').click(function() {
-          if (currentIndex < actions.length - 1) {
-            currentIndex++;
-            console.log('Redo: ' + actions[currentIndex]);
-            updateButtons();
-          }
-        });
-      
-        // Simulate actions (replace with your actual actions)
-        performAction('Action 1');
-        performAction('Action 2');
-        performAction('Action 3');
-      </script>
-
       <br><br><br><br><br>
-
       <div class="container">
         <div class="row">
           <div class="col-md-8 mx-auto white_text " >
@@ -139,18 +74,26 @@
           </div>
         </div>
       </div>
-
       <br><br><br><br><br>
       <!--Footer-->
-      <footer class="footer mt-auto py-3">
-        <div class="container footer-container">
-          <span style="color:aliceblue" >Place sticky footer content here.</span>
-          <p class="white_text">hello there</p>
+      <footer class="footer" style="background-color: #333333; color: #ffffff;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+                    <p>123 Main Street, City, Country</p>
+                    <p>Email: info@example.com</p>
+                    <p>Phone: +1234567890</p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <a href="#"><i class="fab fa-instagram fa-lg mr-3 text-white"></i></a>
+                    <a href="#"><i class="fab fa-facebook fa-lg mr-3 text-white"></i></a>
+                    <a href="#"><i class="fab fa-twitter fa-lg mr-3 text-white"></i></a>
+                    <a href="#"><i class="fab fa-linkedin fa-lg mr-3 text-white"></i></a>
+                    <a href="#"><i class="fab fa-youtube fa-lg mr-3 text-white"></i></a>
+                    <a href="#"><i class="fab fa-pinterest fa-lg mr-3 text-white"></i></a>
+                </div>
+            </div>
         </div>
-      </footer>
-
-
-
-
+    </footer>
 </body>
-

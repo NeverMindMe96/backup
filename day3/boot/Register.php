@@ -1,18 +1,13 @@
 <!DOCTYPE html>
-
-
-
 <?php
   // Include server.php for database connection and other server-side operations                                           
   include('server.php');
-  
   // Function to check if a user already exists in the database
   function userExists($conn, $email) {
       $sql = "SELECT * FROM login WHERE email='$email'";
       $result = $conn->query($sql);
       return $result->num_rows > 0;
   }
-  
   // Function to get the number of registered users
   function getNumberOfUsers($conn) {
       $sql = "SELECT COUNT(*) as total FROM login";
@@ -20,7 +15,6 @@
       $data = $result->fetch_assoc();
       return $data['total'];
   }
-  
   // Check if form is submitted
   //have fun with this code yuvaraj
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -31,53 +25,43 @@
       $password = $_POST['password'];
       $phoneNumber = $_POST['phoneNumber'];
       $dob = $_POST['DOB'];
-      
       // Check if all fields are filled
       if (empty($email) || empty($firstName) || empty($lastName) || empty($password) || empty($phoneNumber)||empty($dob)) {
-          echo "All fields are required!";
+        $warning_message = "All fields are required";
+        echo '<div class="alert alert-warning" role="alert">' . $warning_message . '</div>';
       } else {
           // Check if user already exists
           if (userExists($conn, $email)) {
               //echo "User already exists!";
-              echo "<script type='text/javascript'>alert('User email already exits.');</script>";
-         
+              $warning_message = "User mail id already exits";
+              echo '<div class="alert alert-danger" role="alert">' . $warning_message . '</div>';
           } else {
               // Prepare SQL statement to insert data into the database
               $sql = "INSERT INTO login (email, firstname, lastname, password, contactnumber,DOB) VALUES ('$email', '$firstName', '$lastName', '$password', '$phoneNumber','$dob')";
-  
               if ($conn->query($sql) === TRUE) {
                    //alert("User registered successfully");
-                   echo "<script type='text/javascript'>alert('Registeration Sucessful.');</script>";
+                   $warning_message = "Registeration successful";
+                   echo '<div class="alert alert-success" role="alert">' . $warning_message . '</div>';
               } else {
                   echo "Error: " . $sql . "<br>" . $conn->error;
               }
           }
       }
+      echo "Total registered users: " . getNumberOfUsers($conn);
   }
-  //You will find me in Mercury, Earth, Mars and Jupiter, but not in Venus or Neptune. What am I?
-  // The answer is hidden in the above program 
-  
   // Display the number of registered users
-  echo "Total registered users: " . getNumberOfUsers($conn);
 ?>
-
-
-
-
-
-
+<html>
 <head>
-
-
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="test.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -86,10 +70,6 @@
     <title>Document</title>
 </head>
 <body class="BCK" style="position: relative;">
-
-
-    
-
     <!--Navigation bar-->
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container-fluid">
@@ -123,11 +103,9 @@
                   <li><a class="dropdown-item" href="https://gemini.google.com/app">Gemini</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="https://www.youtube.com/watch?v=q-Y0bnx6Ndw">The one about Cute Puppy</a></li>
-                  
                 </ul>
               </li>
-              <button type="button" class="btn btn-primary" id="undoButton" disabled>Undo</button>
-            <button type="button" class="btn btn-primary" id="redoButton" disabled>Redo</button>
+              <button id="undoBtn" class="btn btn-primary">Undo</button>
             </ul>
             <form class="d-flex">
               <input class="form-control me-2" type="text" placeholder="Search">
@@ -136,77 +114,7 @@
           </div>
         </div>
       </nav>
-
-
-      <!-- undo and redo button-->
-      
-      
-      <!-- Bootstrap JS and jQuery -->
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-      
-      <script>
-        // Example variables to simulate actions
-        var actions = [];
-        var currentIndex = -1;
-      
-        // Function to perform an action (in this example, adding to a list)
-        function performAction(action) {
-          actions.push(action);
-          currentIndex++;
-          updateButtons();
-        }
-      
-        // Function to update button states
-        function updateButtons() {
-          if (currentIndex >= 0) {
-            $('#undoButton').prop('disabled', false);
-          } else {
-            $('#undoButton').prop('disabled', true);
-          }
-          if (currentIndex < actions.length - 1) {
-            $('#redoButton').prop('disabled', false);
-          } else {
-            $('#redoButton').prop('disabled', true);
-          }
-        }
-      
-        // Simulated actions
-        $('#undoButton').click(function() {
-          if (currentIndex >= 0) {
-            console.log('Undo: ' + actions[currentIndex]);
-            currentIndex--;
-            updateButtons();
-          }
-        });
-      
-        $('#redoButton').click(function() {
-          if (currentIndex < actions.length - 1) {
-            currentIndex++;
-            console.log('Redo: ' + actions[currentIndex]);
-            updateButtons();
-          }
-        });
-      
-        // Simulate actions (replace with your actual actions)
-        performAction('Action 1');
-        performAction('Action 2');
-        performAction('Action 3');
-      </script>
-
       <br><br><br><br><br>
-
-        
-
-        <!-- $email = $_POST['email'];
-      $firstName = $_POST['firstName'];
-      $lastName = $_POST['lastName'];
-      $password = $_POST['password'];
-      $phoneNumber = $_POST['phoneNumber']; -->
-
-
-
       <!--REgisteration box-->
       <div class="container">
         <div class="row justify-content-center">
@@ -240,21 +148,17 @@
                        <input name="DOB" type="date" class="form-control" id="date" placeholder="dd/mm/yyyy">
                      </div>
                    </div>
-
                   <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="termsCheckbox">
                    <label class="form-check-label" for="termsCheckbox">I agree to the terms and conditions</label>
                   </div>
-
                  <button type="submit" class="btn btn-primary" id="submitButton" disabled>Submit</button>
-   
                 </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-
       <br><br><br><br><br>
       <!--Footer-->
       <footer class="footer" style="background-color: #333333; color: #ffffff;">
@@ -277,22 +181,17 @@
             </div>
         </div>
     </footer>
-
-
-
     <script>
-  $(document).ready(function(){
-    $('#termsCheckbox').change(function(){
-      if(this.checked){
-        $('#submitButton').prop('disabled', false);
-      } else{
-        $('#submitButton').prop('disabled', true);
-      }
-    });
-  });
+document.getElementById('termsCheckbox').addEventListener('change', function() {
+    document.getElementById('submitButton').disabled = !this.checked;
+});
 </script>
-
-
-
+    <script>
+    $(document).ready(function() {
+      $('#undoBtn').click(function() {
+        window.history.back(); // Redirect to previously opened page
+      });
+    });
+  </script> 
 </body>
-
+</html>
