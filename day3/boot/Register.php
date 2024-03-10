@@ -3,7 +3,7 @@
 
 
 <?php
-  // Include server.php for database connection and other server-side operations                                           //The letter R
+  // Include server.php for database connection and other server-side operations                                           
   include('server.php');
   
   // Function to check if a user already exists in the database
@@ -30,20 +30,24 @@
       $lastName = $_POST['lastName'];
       $password = $_POST['password'];
       $phoneNumber = $_POST['phoneNumber'];
+      $dob = $_POST['DOB'];
       
       // Check if all fields are filled
-      if (empty($email) || empty($firstName) || empty($lastName) || empty($password) || empty($phoneNumber)) {
+      if (empty($email) || empty($firstName) || empty($lastName) || empty($password) || empty($phoneNumber)||empty($dob)) {
           echo "All fields are required!";
       } else {
           // Check if user already exists
           if (userExists($conn, $email)) {
-              echo "User already exists!";
+              //echo "User already exists!";
+              echo "<script type='text/javascript'>alert('User email already exits.');</script>";
+         
           } else {
               // Prepare SQL statement to insert data into the database
-              $sql = "INSERT INTO login (email, firstname, lastname, password, contactnumber) VALUES ('$email', '$firstName', '$lastName', '$password', '$phoneNumber')";
+              $sql = "INSERT INTO login (email, firstname, lastname, password, contactnumber,DOB) VALUES ('$email', '$firstName', '$lastName', '$password', '$phoneNumber','$dob')";
   
               if ($conn->query($sql) === TRUE) {
-                  echo "User registered successfully";
+                   //alert("User registered successfully");
+                   echo "<script type='text/javascript'>alert('Registeration Sucessful.');</script>";
               } else {
                   echo "Error: " . $sql . "<br>" . $conn->error;
               }
@@ -99,7 +103,7 @@
                 <a class="nav-link" href="home.html">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="login.html">Login</a>
+                <a class="nav-link" href="login.php">Login</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="Register.html">Register</a>
@@ -230,7 +234,19 @@
                     <label for="Contace.No">Contact Number</label>
                     <input type="contact-number" name="phoneNumber" class="form-control" id="Phnumber" placeholder="123456789">
                   </div>
-                  <button type="submit" value="Register" class="btn btn-primary btn-block">Register</button>
+                     <div class="form-group">
+                       <label for="DOB">Date of Birth</label>
+                       <input name="DOB" type="date" class="form-control" id="date" placeholder="dd/mm/yyyy">
+                     </div>
+                   </div>
+
+                  <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="termsCheckbox">
+                   <label class="form-check-label" for="termsCheckbox">I agree to the terms and conditions</label>
+                  </div>
+
+                 <button type="submit" class="btn btn-primary" id="submitButton" disabled>Submit</button>
+   
                 </form>
               </div>
             </div>
@@ -261,6 +277,19 @@
         </div>
     </footer>
 
+
+
+    <script>
+  $(document).ready(function(){
+    $('#termsCheckbox').change(function(){
+      if(this.checked){
+        $('#submitButton').prop('disabled', false);
+      } else{
+        $('#submitButton').prop('disabled', true);
+      }
+    });
+  });
+</script>
 
 
 

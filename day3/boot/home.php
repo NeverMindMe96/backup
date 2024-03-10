@@ -21,9 +21,9 @@
 
   <nav>
     <div class="p-5 text-center bg-dark" >
-      <img src="img/AI (2).png">
-      <h2 style="color:white">
-        AI Insights: Unraveling the Future - A Newsletter Chronicle</h2>
+      <img src="img/AI (2).png" height="50px" >
+      <h4 style="color:white">
+        AI Insights: Unraveling the Future - A Newsletter Chronicle</h4>
       
   </div>
 

@@ -108,6 +108,7 @@ if (isset($_POST['logout'])) {
         Name: <?php echo $_SESSION['firstName'] .  " " .  $_SESSION['lastname'] ?> 
         Email: <?php echo $_SESSION['email'] ?> 
         Phone: <?php echo $_SESSION['phonenumber'] ?> 
+        DOB: <?php echo $_SESSION['DOB'] ?> 
       </textarea>
     </div>
   </div>

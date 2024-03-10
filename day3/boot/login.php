@@ -63,6 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $firstName = $userInfo['firstname'];
         $lastName = $userInfo['lastname'];
         $phoneNumber = $userInfo['contactnumber'];
+        $dob = $userInfo['DOB'];
         // Display user information
         echo "<h3>Welcome, $firstName $lastName</h3>";
         echo "<p>Phone Number: $phoneNumber</p>";
@@ -71,10 +72,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['lastname'] = $lastName;
         $_SESSION['email'] = $email;
         $_SESSION['phonenumber'] = $phoneNumber;
+        $_SESSION['DOB'] = $dob;
 
         header( 'Location: login_welcome.php' ) ; 
-
-        
         
     } else {
         // If user info is null, display login error
@@ -229,6 +229,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   <label for="password">Password</label>
                   <input name="password" type="password" class="form-control" id="password" placeholder="Password">
                 </div>
+               
                 <button type="submit" value="Register" class="btn btn-primary btn-block">Submit</button>
               </form>
             </div>
