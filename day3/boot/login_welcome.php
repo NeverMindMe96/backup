@@ -62,16 +62,16 @@ if (isset($_POST['logout'])) {
                 <a class="nav-link" href="home.html">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="login.html">Login</a>
+                <a class="nav-link" href="login.php">Login</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="Register.html">Register</a>
+                <a class="nav-link" href="Register.php">Register</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="Blog.html">Blog</a>
+                <a class="nav-link" href="Blog.php">Blog</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="AboutUs.html">About us</a>
+                <a class="nav-link" href="AboutUs.php">About us</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
